@@ -73,17 +73,17 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否启用主页横幅文字
 			enable: true,
 			// 主页横幅主标题
-			title: "Lovely firefly!",
+			title: "胡  の  桃",
 			// 主页横幅主标题字体大小
 			titleSize: "4.5rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
+				"赤团开时斜飞去",
+				"最不安神晴又复雨",
+				"逗留采血色",
+				"伴君眠花房",
+				"无可奈何燃花作香",
+				"幽蝶能留一缕芳",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
