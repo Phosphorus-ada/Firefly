@@ -11,7 +11,7 @@ const pages = resolvePageToggles({
 	// ── 社交 (Social) ──────────────────────────────────
 
 	// 友链页面开关
-	friends: true,
+	friends: false,
 	// 留言板页面开关，需要配置评论系统
 	guestbook: true,
 
@@ -56,19 +56,19 @@ export const siteConfig: SiteConfig = {
 	keywords: [
 		"学习笔记",
 		"游戏",
-		"Astro",
-		"ACGN",
+		"动漫",
 		"博客",
-		"技术博客",
-		"静态博客",
+		"java",
+		"AI"
+		
 	],
 
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 165,
+		hue: 0,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
-		defaultMode: "system",
+		defaultMode: "dark",
 	},
 
 	// 页面整体宽度（单位：rem）
@@ -112,7 +112,7 @@ export const siteConfig: SiteConfig = {
 			type: "image",
 			value: "assets/images/logo/firefly-light.png",
 			valueDark: "assets/images/logo/firefly-dark.png",
-			alt: "🍀",
+			alt: "🦋",
 		},
 		// 导航栏标题
 		title: "言灵",
