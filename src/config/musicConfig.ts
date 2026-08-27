@@ -54,6 +54,31 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 				cover: "/assets/music/cover/109951169585655912.webp",
 				lrc: "",
 			},
+
+			{
+				name: "雪下的那么认真（爱音）",
+				artist: "千早爱音",
+				url: "/assets/music/雪下的那么认真（爱音）.mp4",
+				cover: "/assets/music/cover/93198233-2454-415e-a00e-e610897bb95f.png",
+				lrc: "",
+			},
+
+			{
+				name: "只对你有感觉",
+				artist: "高松灯",
+				url: "/assets/music/只对你有感觉（高松灯）.mp4",
+				cover: "/assets/music/cover/1cee420c-dd6b-4f14-ad60-501fca81696d.png",
+				lrc: "",
+			},
+
+			{
+				name: "朋友的酒",
+				artist: "高松灯",
+				url: "/assets/music/朋友的酒（灯）.mp4",
+				cover: "/assets/music/cover/3a8bd124-6d84-4d1e-a278-e01d26f61997.png",
+				lrc: "",
+			},
+
 		],
 	},
 };
