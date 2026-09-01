@@ -6,6 +6,7 @@ image: ./images/hu1.png
 tags: [博客]
 category: 界面改动
 draft: false
+pinned: true
 ---
 
 ### 小改动
