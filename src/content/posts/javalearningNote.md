@@ -95,7 +95,7 @@ clone()克隆方法，让对象能完整的克隆到一个新的对象上面
 还有对应的舍入方式，具体的API去查Roundingmods
 
 ## 正则表达式，（API搜索pattern）
-具体详细找正则表达式的使用文章
+具体详细找正则表达式的使用文章https://firefly-9vy.pages.dev/posts/javapatternabout/
 
 用处：
 
@@ -110,3 +110,61 @@ clone()克隆方法，让对象能完整的克隆到一个新的对象上面
 而当第一位是8时，第二只能时0到5，
 那么"([0-7]//d|[8][0-5])"是可行的，
 可以理解为，（）内会单独计算有几个数，中间用|(或)隔开，可以实现该功能
+
+## 时间类
+包括Date、Calendar、SimpleDateFormat等（jdk8之前使用）
+以及与之对应的ZoneId 类Instant 类ZoneDateTime类
+
+LocalDate：年月日
+
+LocalTime：时分秒
+
+LocalDateTime：年月日时分秒
+
+Duration （秒，纳秒）
+
+Period（年月日）
+
+ChronoUnit（最常用，覆盖所有单位）
+
+等等，具体在这篇文章里有详细的介绍
+https://firefly-9vy.pages.dev/posts/javadateclass/
+
+
+
+
+
+
+## 包装类
+包装类：
+在java里，一切皆对象，很多时候，java的很多API、集合都只能传入对象，所以给所有基础数据类新都写了一个包装类
+
+//只有int和char比较特殊，其他全都是首字母大写
+|基础数据类型|包装类|
+|-|-|
+|int|Integer|
+|char|Character|
+|byte|Byte|
+|short|Short|
+|long|Long|
+|float|Float|
+|double|Double|
+|boolean|Boolean|
+
+在jdk5以前，需要new或者调用方法来创建对应的包装类，而且计算的时候还要手动拆箱，计算，装箱。
+
+在jdk5之后，java实现了自动拆装箱，以及自动创建对象，现在基本数据类型和其包装类基本等同一个意思
+
+例如，如今使用只需要像正常使用基本数据类型一样
+```java
+Integer i1=10
+Integer i2=20
+Integer i3=i1+i2//30
+```
+
+正因为他们有包装类，那他们也有自己的方法可以用，具体在API帮助文档搜索对应的包装类名即可
+
+而在包装类的众多方法里，我们最常用的就是一个类型转换
+parsexxx（）//这个除了Character，都有对应的转换方法
+
+**因此，在以后我们用键盘输入时，就可以都用nextline，再去调用数据转化就可以了，这样就可以避免原来那种遇到空格回车就会停止录入的漏洞了**
