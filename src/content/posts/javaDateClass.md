@@ -209,7 +209,7 @@ LocalDateTime：年月日时分秒
 |plusxxx（）|增加对应系列时间的值|
 
 
-### 6. Duration,Period,Instant类\
+### 6. Duration,Period,ChronoUnit类
 jdk8的时间类有几个好用的工具类
 
 Duration （秒，纳秒）
