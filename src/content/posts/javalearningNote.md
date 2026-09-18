@@ -185,3 +185,16 @@ parsexxx（）//这个除了Character，都有对应的转换方法
 
 都需要掌握，尤其是快速排序，最常用。
 
+## 集合
+学习到了有两个大的方向：单列集合和双列集合。具体的详细内容在https://firefly-9vy.pages.dev/posts/javaset/
+### 单列集合
+由collection接口散开，又有List，Set两个大的接口，然后又发散出ArrayList、LinkedList，HashSet、TreeSet等实现类。
+### 双列集合
+由map接口散开，又有HashMap，LinkedHashMap，TreeMap等实现类。
+
+## 数据结构
+学习了基础的数据结构，包括数组、链表、栈、队列、树。
+
+我对其作了学习拆解，并且自己复刻其中的链表、栈、队列、树这几种数据结构。
+
+具体学习内容在https://firefly-9vy.pages.dev/posts/datastructures/

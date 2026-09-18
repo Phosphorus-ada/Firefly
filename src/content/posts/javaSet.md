@@ -226,6 +226,9 @@ set集合的实现方法之一
 - JDK8 以前：新元素存入数组，老元素挂在新元素下面
 - JDK8 以后：新元素直接挂在老元素下面，另外，当链表长度超过8，而且数组长度大于等于64的时候，这个链表自动转为红黑树
 
+#### 小细节
+如果在集合存的是自定义对象，那么一定要在类内重写hashCode方法和equals方法。否则哈希值会用地址值来计算，这没有意义。
+
 #### 遍历
 他会从数据的0索引开始，一条链表一条链表的去遍历元素，和插入的顺序不一样，所以无序
 
@@ -314,6 +317,186 @@ TreeSet<String> Sset2=new TreeSet<>(new Comparator<String>() {
 
 #### 5. 如果想对集合中的元素进行排序
 用 **TreeSet** 集合，基于红黑树。后续也可以用 List 集合实现排序。
+
+
+## 双列集合（Map）
+### Map
+#### Map介绍
+它是一个键值对（Entry）的集合，每个键值对之间用逗号隔开，键值对之间用大括号隔开。所以内部其实是存在一个Entry对象的，每个Entry对象里存着键和值。
+
+格式：
+**Map<键类型,值类型>**
+
+它也像collection一样，有自己的体系图
+![双列集合系列图](./images/Map集合结构图.png)
+
+#### Map的常见方法
+| 方法名称 | 说明 |
+| ---- | ---- |
+| V put(K key,V value) | 添加元素 |
+| V remove(Object key) | 根据键删除键值对元素 |
+| void clear() | 移除所有的键值对元素 |
+| boolean containsKey(Object key) | 判断集合是否包含指定的键 |
+| boolean containsValue(Object value) | 判断集合是否包含指定的值 |
+| boolean isEmpty() | 判断集合是否为空 |
+| int size() | 集合的长度，也就是集合中键值对的个数 |
+|Set<Map.Entry<K,V>> entrySet()| 返回一个Set集合，集合中是键值对对象 |
+|Set<K> keySet() | 返回一个Set集合，集合中是键对象 |
+| V get(Object key) | 根据键获取对应的值 |
+
+小细节
+
+put()方法：
+如果键不存在，就添加键值对，如果键存在，就用新的值替换旧的值，并且会返回被替换的值
+
+#### Map的遍历
+- 1，通过键找值：先用keyset（）方法，在一个set集合里存放所有的键对象，再遍历这个set集合，然后用get（key）方法获取对应的值。
+```java
+Map<String,Integer> map = new HashMap();
+        map.put("a",1);
+        map.put("b",2);
+        map.put("c",3);
+
+        System.out.println(map);
+        Set<String> set=map.keySet();//获取所有的键对象，存进set集合里
+        for(String ch:set){//遍历
+            System.out.println(map.get(ch));//这里要注意，.get()还是由Map对象调用的，传入的值是key，返回的值是value。
+        }
+```
+- 2，通过键值对找：先用entryset（）方法，在一个set集合里存放所有的键值对对象，再遍历这个set集合，然后用getkey（）方法获取键对象，用getvalue（）方法获取值对象。
+```java
+Map<String,Integer> map2 = new HashMap<>();
+        map2.put("a",1);
+        map2.put("b",2);
+        map2.put("c",3);
+
+        Set<Map.Entry<String,Integer>> entries = map2.entrySet();
+        for(Map.Entry<String,Integer> entry:entries){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
+```
+
+- 这里补充一下entry对象的两个常用方法
+
+| 方法名称 | 说明 |
+| ---- | ---- |
+| K getKey() | 获取当前键值对中的键key |
+| V getValue() | 获取当前键值对中的值value |8
+
+- 3,lambda表达式(forEach使用)
+
+格式：
+**map.forEach((key,value)->{......});**
+```java
+Map<String,Integer> map3 = new HashMap<>();
+        map3.put("a",1);
+        map3.put("b",2);
+        map3.put("c",3);
+
+        // map3.forEach(new BiConsumer<String, Integer>() {
+        //     @Override
+        //     public void accept(String s, Integer integer) {
+        //         System.out.println(s+":"+integer);
+        //     }
+        // });
+
+        map3.forEach((key,value)->{
+            System.out.println(key+":"+value);
+        }); 
+```
+
+- 4,补充说明,这里的几种遍历方式均适用于Map的实现类，例如HashMap，LinkedHashMap，Hashtable，HashrTree等。
+
+### 1，HashMap
+#### HashMap介绍
+HashMap是一个基于哈希表的双列集合。
+
+无额外方法，用Map的继承
+
+特点由键决定：无序，不重复，无索引。
+
+#### HashMap底层
+- 本质也是哈希表的基础结构（在数组里存链表，初始16长度，0.75加载因子）
+- 元素是Entry对象。
+- 用键来计算哈希值，根据哈希值来确定元素在数组里的位置。
+- 同样用hashCode()和equals（）方法来保证键的唯一性。因此如果键是自定义的类，那么必须重写这两个方法。
+- 另外，虽然HashMap里面存在红黑树，但是与一般的依靠大小来排序的红黑树不同，HashMap的红黑树是根据键来排序的，因此它不用实现comparable。
+
+### LinkedHashMap
+#### LinkedHashMap介绍
+LinkedHashMap是一个基于哈希表的双列集合。
+
+无新方法
+
+特点由键决定：有序，不重复，无索引。
+
+#### LinkedHashMap底层
+- 底层也是哈希表，与HashMap基本一致，只是多了双链表的属性机制，能记录存储的顺序，因此是有序的
+
+### Hashtable
+这是后面的内容，暂时留白
+
+### HashrTree
+#### HashrTree介绍
+HashrTree是一个基于哈希表的双列集合。
+
+无新方法
+
+特点由键决定：不重复，无索引，可排序。
+
+#### HashrTree底层
+- 底层是红黑树，能对数据的按一定的规则排序，但一般默认是从小到大的升序排序  
+
+#### HashrTree的排序规则
+首先，与treeset类似，一般会用默认的升序排序，此外，它由两种能定义排序规则的方式
+- 1，实现comparable接口，然后在类内重写compareTo（）方法。
+```java
+public class Student implements Comparable<Student> {//引用接口，泛型使用这个类
+    String name;
+    int age;
+
+    @Override
+    public int compareTo(Student o) {
+        //这里要注意，compareTo()方法的返回值是int类型，如果返回0，就表示两个对象相等，如果返回正数，就表示当前对象大于o，如果返回负数，就表示当前对象小于o。
+        //this表示要添加的元素，o表示存在在集合的元素
+        return this.name.compareTo(o.name);
+    }
+}
+```
+- 2，创建集合的时候，传入一个Comparator对象（用匿名类），来定义排序规则。（这个方法一般不用，因为实现comparable接口更方便，但是这个方法的优先级更高，能用于重写那些系统给了默认排序的类的排序方式）
+```java
+Set<Student> set = new HashSet<>(new Comparator<Student>() {//传入一个Comparator对象，来定义排序规则
+    @Override
+    public int compare(Student o1, Student o2) {//重写compare()方法，来定义排序规则，o1表示要添加的元素，o2表示存在在集合的元素
+        return o1.name.compareTo(o2.name);
+    }
+});
+```
+可以看出来，这是函数式接口，所以可以用lambda表达式来实现。
+```java
+Set<Student> set = new HashSet<>((o1, o2) -> o1.name.compareTo(o2.name));
+```
+
+
+### （总结）双列集合的实现类选择
+#### 1,HashMap（无序，不重复，无索引。）
+
+一般默认都会用这个实现类，因为它相对之下效率是最高的
+
+#### 2,LinkedHashMap（有序，不重复，无索引）
+在使用的场景中，需要根据元素的顺序来访问元素，例如在缓存中，需要根据元素的顺序来访问元素，那么就可以用LinkedHashMap。
+
+#### 3,HashrTree可排序，不重复，无索引。
+在使用的时候，如果有要对数据排序的需求，不论是默认的还是自定义的，都可以用HashrTree。
+
+
+
+
+
+
+
+
+
 
 
 
