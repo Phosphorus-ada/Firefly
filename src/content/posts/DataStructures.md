@@ -17,14 +17,231 @@ draft: false
 ## 栈
 栈：先进后出，后进先出，一端开口
 
+以前可以用java自带的stack类，现在推荐用ArrayDeque类。里面有push、pop、peek、isEmpty等方法实现栈的功能
+
+下面是我基于数组实现的栈，给了一些基本的方法
+```java
+package mydo_levelup.datastructures;
+
+public class MyStack<E> {//用泛型
+    E [] stack=(E[]) new Object[10];
+    int top=-1;
+    int size=0;
+
+    public int showLength(){
+        return stack.length;
+    }
+
+
+    public int getTop() {
+        return top;
+    }
+
+    public void setTop(int top) {
+        this.top = top;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+
+
+    public MyStack(){}
+
+    public boolean add(E value){
+        if(size==stack.length){//数据越界扩容
+            E [] temp=(E[]) new Object[(int) (size*1.5)];
+            for(int i=0;i<stack.length;i++){//手动遍历做深拷贝
+                temp[i]=stack[i];
+            }
+            stack=temp;
+        }
+        stack[++top]=value;
+        size++;
+        return true;
+    }
+
+    public E pop(){//获取栈顶元素并删除
+        if(isEmpty()){
+            return null;
+        }
+        E temp=stack[top--];
+        size--;
+        return temp;
+    }
+
+    public E peek(){//仅获取栈顶元素
+        return stack[top];
+    }
+
+    public boolean isEmpty(){//判断是否为空
+        if(size==0){
+            return true;
+        }
+        return false;
+    }
+
+    public int search(E value){//查找元素
+        for(int i=0;i<size;i++){
+            if(stack[i]==value)return i+1;
+        }
+        return -1;
+    }
+
+
+
+}
+
+```
+
 ## 队列
 队列：先进先出，后进后出，后端进，叫进队；前端出，叫出队
 
+java里用Queue接口，使用LinkedList类实现队列的功能
+
+下面是我基于数组实现的队列，给了一些基本的方法
+```java
+package mydo_levelup.datastructures;
+
+public class MyQueue <E>{//队列，队尾入队，队头出队
+   E[] stack=(E[])new Object[10];
+   int top=0;
+   int end=-1;
+   int size=0;
+
+   public void showRealStack(){
+       for(int i=0;i<stack.length;i++){
+           System.out.print(stack[i]+" ");
+       }
+   }
+
+   public void showStack(){
+       for(int i=top;i<=end;i++){
+           System.out.print(stack[i]+" ");
+       }
+   }
+
+   public boolean add(E e){
+       if(size==stack.length){//越界扩容
+           E[] temp=(E[])new Object[(int)(size*1.5)];
+           System.arraycopy(stack,0,temp,0,size);
+           stack=temp;
+       }
+       if(end==stack.length-1&&size<stack.length){//尾指针过头，整体前移
+            for(int i=0;i<size;i++){
+                stack[i]=stack[i+top];
+            }
+            end=end-top;//指针也要同步前移
+            top=0;
+       }
+       stack[++end]=e;
+       size++;
+       return true;
+   }
+
+   public E peek(){
+       if(size==0){
+           return null;
+       }
+       return stack[top];
+   }
+   public E poll(){
+       if(size==0){
+           return null;
+       }
+       size--;
+       return stack[top++];
+   }
+
+}
+
+```
 ## 数组
 数组：查找快，删改慢
 
+这个太过基础了，太底层了，没必要单独实现
+
 ## 链表
 链表：删改快，查找慢：以对象做节点，每个节点包含数据和下个节点的地址（实现方式，创建一个链表类，包含数据和下个节点地址两个基本元素，然后对象与对象连接起来）
+
+java里用LinkedList类实现链表的功能
+
+下面是我实现的链表，给了一些基本的方法
+```java
+package mydo_levelup.datastructures;
+
+public class MyLink <E>{
+    E value;
+    MyLink<E> next=null;
+
+    public MyLink(E value){
+        this.value=value;
+    }
+
+    public MyLink(){}
+
+    public boolean add(E e){
+        //第一个节点也要算进去
+        if(this.value==null){
+            this.value=e;
+            return true;
+        }else if(next==null){
+            this.next=new MyLink<E>(e);
+            return true;
+        }
+        else{
+            return next.add(e);
+        }
+    }
+
+    public int search(E e){
+        if(this.value.equals(e)){
+            return 0;
+        }
+        else return this.next.search(e)+1;
+
+    }
+
+    public boolean remove(int index){//删除第index的链表节点
+        MyLink<E> temp=this;
+        for(int i=1;i<index-1;i++){
+            if(temp.next==null){return false;}
+            temp=temp.next;
+        }
+        temp.next=temp.next.next;
+        return true;
+    }
+
+    public boolean change(int index,E e){//传递要改的节点的索引，和要改的值
+        MyLink<E> temp=this;
+        for(int i=1;i<=index;i++){
+            if(temp.next==null){return false;}
+            temp=temp.next;
+        }
+        temp.value=e;
+        return true;
+    }
+
+    public void showLink(){
+        MyLink<E> temp=this;
+        while(temp!=null){
+            System.out.print(temp.value+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+
+}
+
+
+
+
+```
 
 ## 树
 介绍一个数据结构：树
@@ -41,11 +258,67 @@ draft: false
 ### 2，二叉查找树
 二叉查找树是一种特殊的二叉树，它的每个节点都有一个值，且满足以下性质：
 
-1，每个节点上最多有两个子节点
+- 1，每个节点上最多有两个子节点
+- 2，左子树的所有节点的值都小于根节点的值
+- 3，右子树的所有节点的值都大于根节点的值
 
-2，左子树的所有节点的值都小于根节点的值
+我做了添加，和中序遍历的实现
+```java
+package mydo_levelup.datastructures;
 
-3，右子树的所有节点的值都大于根节点的值
+public class MyTree <E extends Comparable<E>>{
+    MyTree father=null;
+    MyTree leftSon=null;
+    MyTree rightSon=null;
+    E value;
+
+    public MyTree(E value,MyTree father){
+        this.value=value;
+        this.father=father;
+    }
+
+    public MyTree() {}
+
+    public boolean add(E value){//递归实现二叉查找树的添加
+            if(this.value==null) {
+                this.value=value;
+                return true;
+            }
+            else if(this.value.compareTo(value)>0) {
+                if(this.leftSon==null) {
+                    this.leftSon=new MyTree(value,this);
+                    return true;
+                }else {
+                    this.leftSon.add(value);
+                }
+            }else if(this.value.compareTo(value)<0) {
+                if(this.rightSon==null) {
+                    this.rightSon=new MyTree(value,this);
+                    return true;
+                }else  {
+                    this.rightSon.add(value);
+                }
+            }
+            return false;
+    }
+
+
+    public void show(){//递归实现中序遍历
+        MyTree temp=this;
+        if(temp.leftSon!=null) {
+            temp.leftSon.show();
+        }
+        System.out.print(this.value+" ");
+        if(temp.rightSon!=null) {
+            temp.rightSon.show();
+        }else {
+            return;
+        }
+    }
+}
+
+```
+
 
 #### 遍历方式
 1，前序遍历：先访问根节点，再访问左子树，最后访问右子树
@@ -103,6 +376,8 @@ draft: false
 ④ 如果某一个节点是红色，那么它的子节点必须是黑色 (不能出现两个红色节点相连的情况)
 
 ⑤ 对每一个节点，从该节点到其所有后代叶节点的简单路径上，均包含相同数目的黑色节点；
+
+java里被用在TreeMap，HashMap等集合里。
 
 #### 插入节点
 我们总结上面的规则，做出来的应对不同添加情况所做的步骤如下
