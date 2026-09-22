@@ -198,3 +198,50 @@ parsexxx（）//这个除了Character，都有对应的转换方法
 我对其作了学习拆解，并且自己复刻其中的链表、栈、队列、树这几种数据结构。
 
 具体学习内容在https://firefly-9vy.pages.dev/posts/datastructures/
+
+## 可变集合（jdk5）
+- 即方法形参的个数是可变化的
+
+**格式（数据类型...名字）**
+
+方法声明：public int getSum(int...args)
+
+调用：getSum(1,2,3.....)
+
+- 他的底层上本质是一个数组，会把所有传过来的数据放进这个数组里，数组名就是自己设定的形参名，所以在方法内使用时就当数组去使用就行
+
+```java
+public static void main(String[] args) {
+        show(1,2,3,4,5);
+    }
+
+    public static void show(int... args){
+        for(int i:args){
+            System.out.println(i);
+        }
+    }
+```
+细节，一个方法只能有一个可变参数，而且如果有其他的参数的话，可变参数只能放在最后面
+
+## stream流
+可以想象成一个流水线，过程中使用api实现过滤，转换，统计，打印等
+
+整体使用步骤
+- 1，得到一条stream流，放入数据
+- 2，使用中间方法对数据做操作
+- 3，使用终结方法对数据做操作（之所以叫作终结方法，就是因为这些方法没有返回值，不能继续链式调用其他方法）
+
+详细的讲解在https://firefly-9vy.pages.dev/posts/javastreamfunction/
+
+## 方法引用
+把已经有的方法拿来当作函数式接口中抽象方法的方法体
+
+前提：
+- 1，引用处必须是函数式接口
+- 2，被引用的方法必须已经存在
+- 3，被引用方法的形参和返回值需要跟抽象方法保持一致
+- 4，被引用方法的功能要满足当前需求
+
+引用方法符“::”
+
+由于方法引用常常用在stream流中，所以把方法引用放在stream流的文章下https://firefly-9vy.pages.dev/posts/javastreamfunction/
