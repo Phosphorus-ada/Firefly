@@ -4,6 +4,7 @@ published: 2026-08-27
 description: 之前记录的一些java的一些方法的一些细节
 tags: [java，学习]
 category: java
+pinned: true
 draft: false
 ---
 
@@ -245,3 +246,18 @@ public static void main(String[] args) {
 引用方法符“::”
 
 由于方法引用常常用在stream流中，所以把方法引用放在stream流的文章下https://firefly-9vy.pages.dev/posts/javastreamfunction/
+
+## 异常
+在编写代码的时候难免会出现各种各样的异常情况，我们希望能对这些异常进行处理，而不是让程序崩溃，因此java提供了异常机制。
+
+![异常系列图](./images/异常体系图.png)
+
+具体在https://firefly-9vy.pages.dev/posts/javaexception/
+
+## 文件对象
+- File类是java.io包下的一个类，主要用于文件和目录的创建、删除、判断等操作。
+- 而一个File 对象就表示一个路径，可以是文件的路径、也可以是文件夹的路径
+- 这个路径可以是存在的，也允许是不存在的
+- 由于这个类的对象都是表示路径的，因此对这个类的对象的操作都是对路径的操作，或者说是对文件或文件夹的操作，而不会影响文件里的内容。
+
+具体在https://firefly-9vy.pages.dev/posts/javafile/

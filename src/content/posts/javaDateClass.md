@@ -169,10 +169,16 @@ DateTimeFormatter的方法
 static DateTimeFormatter ofParttern(格式)//设定格式
 String format(时间对象)//按指定方式格式化
 ```
+```java
+LocalDateTime now = LocalDateTime.now();
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+String str = now.format(fmt);
+System.out.println(str);
+```
 
 
 
-在使用时，需要先设定格式，再按格式格式化时间对象。
+在使用时，需要先设定格式，再按格式格式化时间对象,而且这个时间对象必须是ZonedDateTime类型的，因为它要求有时间和时区信息。
 
 所以这里有个在jdk8以后的时间的获取方式，让DateTimeFormatter和instant配套使用
 
@@ -183,7 +189,12 @@ ZoneId.of("Asia/Shanghai")//获得一个时区对象
 ZonedDateTime atZone(ZoneId zone)//指定一个时区
 ```java
 ZonedDateTime z3= Instant.now().atZone(ZoneId.of("Asia/Shanghai"));
-        System.out.println(z3);
+System.out.println("绑定时区后:" + z3);
+
+// 用DateTimeFormatter格式化输出
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timeStr = z3.format(fmt);
+        System.out.println("格式化后的北京时间：" + timeStr);
 
 ```
 
