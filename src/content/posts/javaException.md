@@ -2,7 +2,7 @@
 title: java的异常处理
 published: 2026-09-23
 description: 介绍什么是异常，常见的异常处理有哪些
-tags: [java，学习]
+tags: [java,学习]
 category: java
 draft: false
 ---
@@ -28,12 +28,15 @@ draft: false
 程序出现异常的处理方法有两种：
 #### 1，JVM默认处理：
 会把异常信息输出在控制台，并且会在出异常的地方停止运行
-#### 2，try...catch...自定义处理
+#### 2，try...catch...finally自定义处理
 格式：
 ```java
 try{可能出现异常的代码
 }catch(异常类名 变量名){
 出现对应异常后要执行的代码
+}
+finally{
+    无论是否出现异常，都要执行的代码
 }
 ```
 ##### 运作的方式:

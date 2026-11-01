@@ -2,7 +2,7 @@
 title: java stream流
 published: 2026-09-22 
 description: 详细介绍stream流的使用
-tags: [java，学习]
+tags: [java,学习]
 category: java
 draft: false
 ---

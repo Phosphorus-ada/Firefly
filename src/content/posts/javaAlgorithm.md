@@ -2,7 +2,7 @@
 title: 一些常见的基础算法
 published: 2026-09-11
 description: 主要详细讲顺序查找，二分查找，插值查找，分块查找，以及冒泡排序，插入排序，快速排序等
-tags: [java，学习]
+tags: [java,学习,算法]
 category: java
 draft: false
 ---

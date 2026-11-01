@@ -1,12 +1,13 @@
 ---
-title: java集合
+title: java集合与泛型
 published: 2026-09-15
 description: 会把java里常用的集合，以及整个集合体系都表现出来，在学习这些基础的基础上，就可以学习到基本的数据结构
-tags: [java，学习]
+tags: [java,学习]
 category: java
 draft: false
 ---
 
+# 集合
 ## 集合概述
 首先，在java里，集合分两大派系，单列集合（collection）和双列集合（map）
 
@@ -451,8 +452,28 @@ LinkedHashMap是一个基于哈希表的双列集合。
 #### LinkedHashMap底层
 - 底层也是哈希表，与HashMap基本一致，只是多了双链表的属性机制，能记录存储的顺序，因此是有序的
 
-### Hashtable
-这是后面的内容，暂时留白
+### Properties（Hashtable）
+Properties这个是一个基于哈希表的双列集合。与之相关的是配置文件，我们先来了解配置文件
+
+#### 配置文件
+- 我们学用properties配置文件
+- 它是一个后缀名为properties的文件，内部数据是以键值对来存储的
+- java在map集合下也提供了properties的实现类
+
+#### Properties的属性
+- 构造方法
+Properties()//无泛型
+
+- 作为一个基础的集合的方法
+    put（键，值）
+    遍历可使用map的所有遍历方式，但泛型使用<Object>
+
+- 针对properties配置文件的功能
+    - 写方法
+        store(outputstream,"注释")
+    - 读方法
+        load(inputstream)//会把数据存入调用对象中
+
 
 ### HashrTree
 #### HashrTree介绍
@@ -507,21 +528,24 @@ Set<Student> set = new HashSet<>((o1, o2) -> o1.name.compareTo(o2.name));
 #### 3,HashrTree可排序，不重复，无索引。
 在使用的时候，如果有要对数据排序的需求，不论是默认的还是自定义的，都可以用HashrTree。
 
+## 集合的补充
+### 阻塞队列
+- 本质是一种队列集合，实现类用ArrayBlockingQueue或者LinkedBlockingQueue
+- ArrayBlockingQueue底层是数组
+- LinkedBlockingQueue底层是链表
+这个队列内部是自带锁的，因此有阻塞的功能，所以叫阻塞队列
+
+相关方法
+|方法| 说明|
+|--|--|
+|ArrayBlockingQueue/LinkedBlockingQueue <?>  |构造，带泛型|
+|put（） |放数据|
+|take（）|取数据，它是按照先进先出的方式取得|
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-## 泛型
+# 泛型
 ### 泛型的说明
 基本说明：他就是限定一个方法，类的数据类型的一个“看门打大爷”，如果没有他的话，代码会很难管理，例如Arraylist的使用，没有它的话，在遍历元素的时候没法直接使用那些元素的方法。
 

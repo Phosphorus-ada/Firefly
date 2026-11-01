@@ -2,7 +2,7 @@
 title: 数据结构
 published: 2026-09-15
 description: 基于java的使用，列举常见的数据结构，以及其基本实现方式
-tags: [java，学习]
+tags: [java,学习,数据结构]
 category: java
 draft: false
 ---

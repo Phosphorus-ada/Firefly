@@ -2,7 +2,7 @@
 title: java学习笔记
 published: 2026-08-27
 description: 之前记录的一些java的一些方法的一些细节
-tags: [java，学习]
+tags: [java,学习]
 category: java
 pinned: true
 draft: false
@@ -261,3 +261,31 @@ public static void main(String[] args) {
 - 由于这个类的对象都是表示路径的，因此对这个类的对象的操作都是对路径的操作，或者说是对文件或文件夹的操作，而不会影响文件里的内容。
 
 具体在https://firefly-9vy.pages.dev/posts/javafile/
+
+## 配置文件
+有时，我们希望有一些数据能够方便的被替换或修改，就可以写配置文件
+
+我们学用properties配置文件，
+它是一个后缀名为properties的文件，内部数据是以键值对来存储的，
+java在map集合下也提供了properties的实现类
+### 写法
+- 构造方法
+    - Properties()//无泛型
+
+- 作为一个基础的集合的方法
+    - put（键，值）
+    - 遍历可使用map的所有遍历方式，但泛型使用\\<Object\\>
+
+- 针对properties配置文件的功能
+    - 写方法
+        - store(Ootputstream,"注释")
+    - 读方法
+        - load(inputstream)//会把数据存入调用对象中
+
+
+## 线程和锁
+java的一大特色就是多线程，java的多线程是基于操作系统的多线程来实现的，我们可以通过继承Thread类或者实现Runnable接口来创建线程。讲到多线程就会遇上并发问题，所以锁是必不可少的，java提供了synchronized关键字和Lock接口来实现线程同步。
+具体在https://firefly-9vy.pages.dev/posts/javathread/
+
+## 网络编程
+java提供了网络编程的类，包括Socket、ServerSocket、InetAddress等。

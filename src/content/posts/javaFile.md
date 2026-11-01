@@ -2,7 +2,7 @@
 title: java的io的一部分：File类
 published: 2026-09-23
 description: 仔细介绍一下File类以及使用方式
-tags: [java，学习]
+tags: [java,学习]
 category: java
 draft: false
 ---
@@ -20,6 +20,7 @@ draft: false
 |public File(String pathname)	|根据文件路径创建文件对象|
 |public File(String parent, String child)	|根据父路径名字符串和子路径名字符串创建文件对象|
 |public File(File parent, String child)	|根据父路径对应文件对象和子路径名字符串创建文件对象|
+
 示例
 ```java
         //知识补充：\是转义字符，两个\才能正常表示一个\
